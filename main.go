@@ -3,15 +3,12 @@ package main
 import (
 	"fmt"
 	"reflect"
-	"unicode/utf8"
 )
 
 func main() {
-
 	StringsInGo()
 	RunesInGo()
 	NaiveSubstring()
-	Elide("some text")
 }
 
 func StringsInGo() {
@@ -46,31 +43,7 @@ func NaiveSubstring() {
 	// e6 88 aa (截) e6 96 ad (断) e9 94 99 (错) e8 af af (误)
 
 	b := a[:max]
-	fmt.Println("Bad cut: %s", b) // 截�
-}
-
-
-const (
-	VarcharLimit = 100
-	ThreeDotsElision  = "..."
-	FreeTextMaxLength = VarcharLimit - 3 // make room for three dots
-)
-
-func Elide(field string) string {
-
-	if len(field) > FreeTextMaxLength {
-
-		// Convert to byte array since it's required by the utf8 func
-		// Also it's always true that len(bytes) >= len(chars)
-		bytes := []byte(field)
-
-		for len(bytes) > FreeTextMaxLength {
-			_, size := utf8.DecodeLastRune(bytes)
-			bytes = bytes[:len(bytes)-size]
-		}
-		return string(bytes) + ThreeDotsElision
-	}
-	return field
+	fmt.Printf("Bad cut: %s", b) // 截�
 }
 
 

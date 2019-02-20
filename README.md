@@ -10,6 +10,7 @@ This repo contains the sources used in the "Rune Magic in Go" talk.
 
 - dep
 
+Install dep:
 
     $ brew install dep
 or    
